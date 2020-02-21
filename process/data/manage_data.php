@@ -25,6 +25,7 @@ echo"
 		</td>
 	</tr>";
 	include("../include/navbar.inc");
+	// showQuery is in ../common/menu.js and just enables the block.
 	echo"
 	<tr>
 		<td>
@@ -51,6 +52,7 @@ echo"
 			</span>
 	</div>
 
+	<!--//this loads the next page and somehow sends the data through post-->
 <form name='process' action='../data/select_output.php' method='post'>
 <div id='all_dept'>
 	Select A Department:
