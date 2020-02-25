@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="./common/form_val.css" type="text/css" rel="stylesheet">
+
+<meta charset="utf-8">
+<title>Server-Side Validation and Database Integration</title>
+</head>
+
+<body>
+<div id="container">
+	<table id="intro_tbl">
+		<tr>
+			<td colspan="2">
+				<div id="title">
+					Server-Side Validation and Database Integration
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p class="para">
+					This Web site incorporates a two-side approach to collecting, analyzing and storing data in a database. They both use a mix of client-side and server-side approaches.
+				</p>
+				<p class="para">
+					The client-side approach uses the user's browser to process most of the work. This includes the first stage of data validation and walking the user through the process until data is ready for storage on a database. When it is ready to move to the server, it uses a server-side validation process before subitting the data to the database.
+				</p>
+				<p class="para">
+					The server-side approach utilizes the server for validation and processing as soon as possible in the process. There is client-side validation employed since no data should leave the client until validation is complete. The key difference between the two approaches is that the server-side uses a feedback protocol from the server while the client-side approach uses the client up to point where data has been validated and is now ready for storage in a database. 
+				</p>
+				<p class="para">
+					In both cases, there is server validation before any data is stored to the database. This is a key component to this process. Data integrity is always maintained and security of that data is paramount to a successful process.
+				</p>
+				<p class="para">
+					The buttons below will let you experience either approach. All of the files are stored in one project folder named <span>client</span>. For a list of the key files and their role in this process please clieck here.
+				</p>
+			</td>
+		</tr>
+	</table>
+	<table id="btn_tbl">
+		<tr>
+			<td>
+				<form name="client" action="./htm/client.htm" method="post">
+					<input type="submit" class="btn" value="Client-Side Process" />
+				</form>
+			</td>
+			<td>
+				<form name="client" action="./php/client.php" method="post">
+					<input type="submit"  class="btn" value = "Server-Side Process" />
+				</form>
+			</td>
+		</tr>
+	</table>
+</div> <!-- end container -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

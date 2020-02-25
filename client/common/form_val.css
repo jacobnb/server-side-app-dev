@@ -1,0 +1,144 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body
+	{
+		font-size:12pt;
+		font-family:arial;
+		color:#000000;
+		background-color:#ffffcc;
+		margin:0px;
+		width:100%;
+		height:100%;
+	}
+#container
+	{
+		position:relative;
+		margin:auto;
+		width:1000px;
+		background-image:url(../images/table_bkgr.gif);
+		min-height:100%;
+	}
+
+table
+	{
+		margin:auto;
+		color:#eeeeee;
+		width:1000px;
+		min-height:768px;
+	}
+
+.btn
+{
+	background-color:#ffffcc;
+	padding:1%;
+	border-radius:15%;
+	
+}
+
+.data
+{
+	text-align:left;
+	color:#000000;
+	vertical-align:top;
+	font-size:16pt;
+	width:40%;
+}
+.feedback_labels
+	{
+		text-align:right;
+		color:#000000;
+		vertical-align:top;
+		font-size:16pt;
+		width:40%;
+	}
+	
+.labels
+	{
+		text-align:right;
+		color:#ffffff;
+		vertical-align:top;
+		font-size:16pt;
+		width:40%;
+	}
+
+.para
+{
+	font-size:120%;
+}
+
+#btn_tbl
+{
+	position:relative;
+	margin:auto;
+	width:30%;
+}
+
+#feedback_title
+{
+	font-size:150%;
+	text-align:center;
+	border-bottom:solid #000000 1px;
+	padding:1%;
+}
+
+#feedbk_tbl
+{
+	width:50%;
+	font-size:150%;
+}
+
+#feedbk_tbl td
+{
+	padding:2%;
+}
+
+#intro
+	{
+		font-size:14pt;
+		text-align:left;
+	}
+
+#intro_tbl
+{
+	position:relative;
+	margin:auto;
+	width:80%;
+}
+	
+#tableTitle
+	{
+		font-size:24pt;
+		color:#000000;
+		text-align:center;
+		width:1000px;
+	}
+
+#thanks
+	{
+		height:100%;
+		width:1000px;
+		text-align:center;
+		color:#eeeeee;
+	}
+#title
+{
+	text-align:center;
+	font-size:180%;
+	padding-bottom:10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,7 +14,7 @@
 
 <div id="menu2">
 	<p>Use the links below to review student data:</p>
-		<a href="./data/show_data.php">General Data</a>
+		<a href="./data/show_datacopy.php">General Data</a>
 		<a href="./data/show_address.php">Address</a>
 		<a href="./data/show_dept.php">Department</a>
 		<a href="./data/show_apps.php">Applications</a>
