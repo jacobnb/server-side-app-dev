@@ -1,12 +1,16 @@
 use clientprocess;
-
-select corpclient.cid,cfn,cln,cstreet,ccity,cst,czip,soft_name, comments, dept_name, department.dept_id
-from corpclient, address, software, clientsoftware, clientcomments, department
+select corpclient.cid,cfn,cln,cstreet,ccity,cst,czip,soft_name,dept_name, department.dept_id
+from corpclient, address, software, clientsoftware, department#, clientcomments
 where corpclient.cid=address.cid 
 and corpclient.cid=clientsoftware.cid 
 and software.soft_id=clientsoftware.soft_id 
-and corpclient.cid = clientcomments.cid
+# software has name and type (os, or other)
+#client software just has soft_id
+#and software.soft_type !=1 # ignore OS.
+and software.soft_id = 1 #windows 10 only
+#and corpclient.cid = clientcomments.cid
 and corpclient.dept_id = department.dept_id
+order by cid
 # corpclient.cid=address.cid
 
 # corpclient.cid=clientsoftware.cid and
