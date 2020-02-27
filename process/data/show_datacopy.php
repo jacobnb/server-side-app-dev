@@ -31,26 +31,41 @@ else
 
 // chunks - full name, address
 
-//address: first name, last name, street, city, state, zip
+// address: first name, last name, street, city, state, zip
 // department: ID, full name, dept ID, department, 
+// - department.dept_name / dept_id
 // application software: ID, full name
+// - software.soft_id = #
 // operating system: full name, operating system.
-//residency by state: full name, address
-//residency by zip: full name, address
-
+// - software.soft_id = #
+// residency by state: full name, address
+// - address.cst = 'CC'
+// residency by zip: full name, address
+// - address.czip = #####
 // just query everything and then display bits?
 $query1 = "select cfn,cln,cem
 from corpclient
 order by cid
 LIMIT $startrow, 10";
-
-
 $result1 = mysqli_query($link,$query1);
+
+$dept = 3;
+$queryDept = "select corpclient.cid,cfn,cln,dept_name, department.dept_id
+from corpclient, department
+where corpclient.dept_id = department.dept_id
+and department.dept_id = $dept
+order by cid
+LIMIT $startrow, 10";
+$resultDept = mysqli_query($link, $queryDept);
+
 
 	
 echo"
 <table id='showOutput'>
-	<tr>
+	<tr>";
+
+	if(false){
+		echo"
 		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Email</td></tr>";
 
 		while($row = mysqli_fetch_array($result1))
@@ -62,6 +77,21 @@ echo"
 			"<td class='data_td'>{$row['cem']}</td>";
 			echo"</tr>";
 		}
+	}
+	elseif(isset($dept)){
+		echo"
+		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Dept Name</td><td class='client_data'>Dept ID</td></tr>";
+		while($row = mysqli_fetch_array($resultDept))
+		{
+			echo"
+			<tr>";
+			echo"<td class='data_td'>{$row['cfn']}</td>" .
+			"<td class='data_td'>{$row['cln']} </td>" .
+			"<td class='data_td'>{$row['dept_name']}</td>".
+			"<td class='data_td'>{$row['dept_id']}</td>";
+			echo"</tr>";
+		}
+	}
 	
 echo"
 	<tr>

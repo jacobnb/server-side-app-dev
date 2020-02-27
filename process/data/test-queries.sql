@@ -6,8 +6,8 @@ and corpclient.cid=clientsoftware.cid
 and software.soft_id=clientsoftware.soft_id 
 # software has name and type (os, or other)
 #client software just has soft_id
-#and software.soft_type !=1 # ignore OS.
-and software.soft_id = 1 #windows 10 only
+and software.soft_type !=1 # ignore OS.
+# and software.soft_id = 7 #1-4 OS, 5-7 software.
 #and corpclient.cid = clientcomments.cid
 and corpclient.dept_id = department.dept_id
 order by cid
