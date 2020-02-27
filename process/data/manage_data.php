@@ -3,6 +3,10 @@ require("../data/db_connect.php");
 $sql1 = "select dept_id,dept_name from Department order by dept_id";
 $result1 =  mysqli_query($link,$sql1);
 
+$sqlbefore2 = "select soft_id, soft_name from software where soft_type!=1
+order by soft_id ";
+
+$resultbefore2 = mysqli_query($link, $sqlbefore2);
 $sql2="select soft_id, soft_name from software where soft_type=1
 		order by soft_id ";
 $result2=mysqli_query($link,$sql2);
@@ -36,7 +40,7 @@ echo"
 				Department
 			</span>
 			<span class='radio'>
-				<input type='radio' name='p' value='a'/>
+				<input type='radio' name='p' value='a' onclick=showQuery('all_soft') />
 				Application Software
 			</span>
 			<span class='radio'>
@@ -74,6 +78,25 @@ echo"
 </form>
 
 <form name='process' action='../data/show_datacopy.php' method='post'>
+<div id='all_soft'>
+	Select Software:
+	<select name='data'>
+      <option value=''>Choose One</option>";
+		while($row = mysqli_fetch_assoc($resultbefore2))
+			{
+				echo"<option value='".$row['soft_id']."'>".
+				$row['soft_name']."</option>";
+			}
+    echo"  
+    </select>
+	<p>
+		<input type='hidden' value='2' name='query_id'/>
+		<input type='submit' value='Select Data' name='s' />
+	</p>
+</div>
+</form>
+
+<form name='process' action='../data/show_datacopy.php' method='post'>
 <div id='all_ops'>
 	Select An Operating System:
 	<select name='data'>
@@ -92,7 +115,7 @@ echo"
 </div>
 </form>
 
-<form name='process' action='../data/select_output.php' method='post'>
+<form name='process' action='../data/show_datacopy.php' method='post'>
 <div id='all_st'>
 	Select A State:
 	<select name='data'>
@@ -112,7 +135,7 @@ echo"
 </form>
 
 
-<form name='process' action='../data/select_output.php' method='post'>
+<form name='process' action='../data/show_datacopy.php' method='post'>
 <div id='all_zip'>
 	Enter  Zip Code:<input name='data' size='5' maxlength='5'/>
 	<p>

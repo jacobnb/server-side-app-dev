@@ -94,7 +94,7 @@ table
 	display:block;
 }
 
-#all_dept, #all_ops, #all_st, #all_zip
+#all_dept, #all_soft, #all_ops, #all_st, #all_zip
 {
 	position:absolute;
 	top:15%;

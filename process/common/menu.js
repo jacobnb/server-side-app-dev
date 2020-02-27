@@ -41,7 +41,7 @@ function showSubMenu(){
 }
 
 function showQuery(a){
-	var menu = new Array('all_dept','all_ops','all_st','all_zip');
+	var menu = new Array('all_dept','all_soft','all_ops','all_st','all_zip');
 	for (i=0;i<menu.length;i++)
 	{
 		if(menu[i] == a)

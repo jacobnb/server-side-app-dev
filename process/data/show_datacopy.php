@@ -47,7 +47,7 @@ if(isset($_POST['data'])){
 	$data = $_POST['data'];
 }
 else{
-	$data = "Cause Error";
+	$data = "VT";
 }
 if(isset($_POST['query_id'])){
 	$query_id=$_POST['query_id'];
@@ -78,10 +78,6 @@ switch($query_id){
 		$resultDept = mysqli_query($link, $queryDept);
 	break;
 	case 2: //Application software
-		// $query = "
-		// LIMIT $startrow, 10";
-		// $result = mysqli_query($link, $query);
-	break;
 	case 3: // OS
 		$queryOS = "select corpclient.cid,cfn,cln,soft_name, software.soft_id
 		from corpclient, software, clientsoftware
@@ -93,14 +89,22 @@ switch($query_id){
 		$resultOS = mysqli_query($link, $queryOS);
 	break;
 	case 4: //State
-		// $query = "
-		// LIMIT $startrow, 10";
-		// $result = mysqli_query($link, $query);
+		$queryState = "select corpclient.cid,cfn,cln,cstreet,ccity,cst,czip
+		from corpclient, address
+		where corpclient.cid=address.cid
+		and address.cst='$data'
+		order by cid
+		LIMIT $startrow, 10";
+		$resultState = mysqli_query($link, $queryState);
 	break;
 	case 5: //zip
-		// $query = "
-		// LIMIT $startrow, 10";
-		// $result = mysqli_query($link, $query);
+		$queryZip = "select corpclient.cid,cfn,cln,cstreet,ccity,cst,czip
+		from corpclient, address
+		where corpclient.cid=address.cid
+		and address.czip=$data
+		order by cid
+		LIMIT $startrow, 10";
+		$resultZip = mysqli_query($link, $queryZip);
 	break;
 }
 
@@ -127,7 +131,6 @@ echo"
 	}
 	switch($query_id){
 		case 1: //Department
-			
 			echo"
 		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Dept Name</td><td class='client_data'>Dept ID</td></tr>";
 		while($row = mysqli_fetch_array($resultDept))
@@ -142,9 +145,7 @@ echo"
 		}
 		break;
 		case 2: //Application software
-		break;
 		case 3: // OS
-			//corpclient.cid,cfn,cln,soft_name, software.soft_id
 			echo"
 		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Software</td><td class='client_data'>Software ID</td></tr>";
 		while($row = mysqli_fetch_array($resultOS))
@@ -159,8 +160,36 @@ echo"
 		}
 		break;
 		case 4: //State
+			echo"
+		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Street</td><td class='client_data'>City</td><td class='client_data'>State</td><td class='client_data'>Zip</td></tr>";
+		while($row = mysqli_fetch_array($resultState))
+		{
+			echo"
+			<tr>";
+			echo"<td class='data_td'>{$row['cfn']}</td>" .
+			"<td class='data_td'>{$row['cln']} </td>" .
+			"<td class='data_td'>{$row['cstreet']}</td>".
+			"<td class='data_td'>{$row['ccity']}</td>".
+			"<td class='data_td'>{$row['cst']}</td>".
+			"<td class='data_td'>{$row['czip']}</td>";
+			echo"</tr>";
+		}
 		break;
 		case 5: //zip
+			echo"
+		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Street</td><td class='client_data'>City</td><td class='client_data'>State</td><td class='client_data'>Zip</td></tr>";
+		while($row = mysqli_fetch_array($resultZip))
+		{
+			echo"
+			<tr>";
+			echo"<td class='data_td'>{$row['cfn']}</td>" .
+			"<td class='data_td'>{$row['cln']} </td>" .
+			"<td class='data_td'>{$row['cstreet']}</td>".
+			"<td class='data_td'>{$row['ccity']}</td>".
+			"<td class='data_td'>{$row['cst']}</td>".
+			"<td class='data_td'>{$row['czip']}</td>";
+			echo"</tr>";
+		}
 		break;
 	}
 	
