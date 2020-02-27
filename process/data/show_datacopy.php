@@ -17,6 +17,12 @@ elseif($_GET['startrow']<=0)
   $startrow = 0;
 }
 
+// TODO: this allows user to go through a bunch of blank pages. try something like 
+// $rowcount = mysqli_num_rows($resultDept);
+// if($startrow > ($rowcount+20)){
+// 	$startrow = $startrow-10;
+// }
+// after query
 elseif($_GET['startrow']<$rowcount and $_GET['startrow']!=0)
 {
   $startrow = (int)$_GET['startrow'];
@@ -61,11 +67,7 @@ else {
 // 4 - State
 // 5 - zip
 
-$query1 = "select cfn,cln,cem
-from corpclient
-order by cid
-LIMIT $startrow, 10";
-$result1 = mysqli_query($link,$query1);
+
 
 switch($query_id){
 	case 1: //Department
@@ -76,6 +78,7 @@ switch($query_id){
 		order by cid
 		LIMIT $startrow, 10";
 		$resultDept = mysqli_query($link, $queryDept);
+
 	break;
 	case 2: //Application software
 	case 3: // OS
@@ -106,6 +109,13 @@ switch($query_id){
 		LIMIT $startrow, 10";
 		$resultZip = mysqli_query($link, $queryZip);
 	break;
+	default:
+		$query1 = "select cfn,cln,cem
+		from corpclient
+		order by cid
+		LIMIT $startrow, 10";
+		$result1 = mysqli_query($link,$query1);
+	break;
 }
 
 
@@ -114,21 +124,6 @@ switch($query_id){
 echo"
 <table id='showOutput'>
 	<tr>";
-
-	if(false){
-		echo"
-		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Email</td></tr>";
-
-		while($row = mysqli_fetch_array($result1))
-		{
-			echo"
-			<tr>";
-			echo"<td class='data_td'>{$row['cfn']}</td>" .
-			"<td class='data_td'>{$row['cln']} </td>" .
-			"<td class='data_td'>{$row['cem']}</td>";
-			echo"</tr>";
-		}
-	}
 	switch($query_id){
 		case 1: //Department
 			echo"
@@ -190,6 +185,20 @@ echo"
 			"<td class='data_td'>{$row['czip']}</td>";
 			echo"</tr>";
 		}
+		break;
+		default:
+			echo"
+			<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Email</td></tr>";
+
+			while($row = mysqli_fetch_array($result1))
+			{
+				echo"
+				<tr>";
+				echo"<td class='data_td'>{$row['cfn']}</td>" .
+				"<td class='data_td'>{$row['cln']} </td>" .
+				"<td class='data_td'>{$row['cem']}</td>";
+				echo"</tr>";
+			}
 		break;
 	}
 	
