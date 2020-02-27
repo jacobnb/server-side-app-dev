@@ -53,7 +53,7 @@ echo"
 	</div>
 
 	<!--//this loads the next page and somehow sends the data through post-->
-<form name='process' action='../data/select_output.php' method='post'>
+<form name='process' action='../data/show_datacopy.php' method='post'>
 <div id='all_dept'>
 	Select A Department:
 	<select name='data'>
@@ -66,13 +66,14 @@ echo"
     echo" 
     </select>
 	<p>
+	
 		<input type='hidden' value='1' name='query_id'/>
 		<input type='submit' value='Select Data' name='s' />
 	</p>
 </div>
 </form>
 
-<form name='process' action='../data/select_output.php' method='post'>
+<form name='process' action='../data/show_datacopy.php' method='post'>
 <div id='all_ops'>
 	Select An Operating System:
 	<select name='data'>
@@ -85,7 +86,7 @@ echo"
     echo"  
     </select>
 	<p>
-		<input type='hidden' value='2' name='query_id'/>
+		<input type='hidden' value='3' name='query_id'/>
 		<input type='submit' value='Select Data' name='s' />
 	</p>
 </div>
@@ -104,7 +105,7 @@ echo"
     echo"
     </select>
 	<p>
-		<input type='hidden' value='3' name='query_id'/>
+		<input type='hidden' value='4' name='query_id'/>
 		<input type='submit' value='Select Data' name='s' />
 	</p>
 </div>
@@ -115,7 +116,7 @@ echo"
 <div id='all_zip'>
 	Enter  Zip Code:<input name='data' size='5' maxlength='5'/>
 	<p>
-	<input type='hidden' value='4' name='query_id'/>
+	<input type='hidden' value='5' name='query_id'/>
 		<input type='submit' value='Select Data' name='s' />
 	</p>
 </div>

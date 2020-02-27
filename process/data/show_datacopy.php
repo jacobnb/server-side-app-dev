@@ -43,20 +43,67 @@ else
 // residency by zip: full name, address
 // - address.czip = #####
 // just query everything and then display bits?
+if(isset($_POST['data'])){
+	$data = $_POST['data'];
+}
+else{
+	$data = "Cause Error";
+}
+if(isset($_POST['query_id'])){
+	$query_id=$_POST['query_id'];
+}
+else {
+	$query_id = 0;
+}
+// 1 - department
+// TODO: 2 - application software 
+// 3 - OS
+// 4 - State
+// 5 - zip
+
 $query1 = "select cfn,cln,cem
 from corpclient
 order by cid
 LIMIT $startrow, 10";
 $result1 = mysqli_query($link,$query1);
 
-$dept = 3;
-$queryDept = "select corpclient.cid,cfn,cln,dept_name, department.dept_id
-from corpclient, department
-where corpclient.dept_id = department.dept_id
-and department.dept_id = $dept
-order by cid
-LIMIT $startrow, 10";
-$resultDept = mysqli_query($link, $queryDept);
+switch($query_id){
+	case 1: //Department
+		$queryDept = "select corpclient.cid,cfn,cln,dept_name, department.dept_id
+		from corpclient, department
+		where corpclient.dept_id = department.dept_id
+		and department.dept_id = $data
+		order by cid
+		LIMIT $startrow, 10";
+		$resultDept = mysqli_query($link, $queryDept);
+	break;
+	case 2: //Application software
+		// $query = "
+		// LIMIT $startrow, 10";
+		// $result = mysqli_query($link, $query);
+	break;
+	case 3: // OS
+		$queryOS = "select corpclient.cid,cfn,cln,soft_name, software.soft_id
+		from corpclient, software, clientsoftware
+		where corpclient.cid=clientsoftware.cid 
+		and software.soft_id=clientsoftware.soft_id 
+		and software.soft_id = $data 
+		order by cid
+		LIMIT $startrow, 10";
+		$resultOS = mysqli_query($link, $queryOS);
+	break;
+	case 4: //State
+		// $query = "
+		// LIMIT $startrow, 10";
+		// $result = mysqli_query($link, $query);
+	break;
+	case 5: //zip
+		// $query = "
+		// LIMIT $startrow, 10";
+		// $result = mysqli_query($link, $query);
+	break;
+}
+
 
 
 	
@@ -78,8 +125,10 @@ echo"
 			echo"</tr>";
 		}
 	}
-	elseif(isset($dept)){
-		echo"
+	switch($query_id){
+		case 1: //Department
+			
+			echo"
 		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Dept Name</td><td class='client_data'>Dept ID</td></tr>";
 		while($row = mysqli_fetch_array($resultDept))
 		{
@@ -91,20 +140,51 @@ echo"
 			"<td class='data_td'>{$row['dept_id']}</td>";
 			echo"</tr>";
 		}
+		break;
+		case 2: //Application software
+		break;
+		case 3: // OS
+			//corpclient.cid,cfn,cln,soft_name, software.soft_id
+			echo"
+		<td class='client_data'>Client First Name</td><td class='client_data'>Client Last Name</td><td class='client_data'>Software</td><td class='client_data'>Software ID</td></tr>";
+		while($row = mysqli_fetch_array($resultOS))
+		{
+			echo"
+			<tr>";
+			echo"<td class='data_td'>{$row['cfn']}</td>" .
+			"<td class='data_td'>{$row['cln']} </td>" .
+			"<td class='data_td'>{$row['soft_name']}</td>".
+			"<td class='data_td'>{$row['soft_id']}</td>";
+			echo"</tr>";
+		}
+		break;
+		case 4: //State
+		break;
+		case 5: //zip
+		break;
 	}
 	
+	//use forms here to pass POST values.
 echo"
 	<tr>
 		<td>
 			<button class='btn' onclick=\"window.location.href='../index.php'\">Return to Home Page</button>
 		</td>
 		<td>
-			<a class='btn' href=".$_SERVER['PHP_SELF'].'?startrow='.($startrow-10);
-			echo">Previous</a>
+		<form method='post' action=".$_SERVER['PHP_SELF'].'?startrow='.($startrow-10).">
+			<input type='hidden' name='query_id' value=".$query_id.">
+			<input type='hidden' name='data' value=".$data.">
+			<input class='btn' type='submit' value='Previous' />
+		</form>
+			
 		</td>
 		<td  colspan='3'>
-			<a class='btn' href=".$_SERVER['PHP_SELF'].'?startrow='.($startrow+10);
-			echo">Next</a>
+		<form method='post' action=".$_SERVER['PHP_SELF'].'?startrow='.($startrow+10).">
+			<input type='hidden' name='query_id' value=".$query_id.">
+			<input type='hidden' name='data' value=".$data.">
+			<input class='btn' type='submit' value='Next' />
+		</form>
+			
 		</td>
 	</tr>
 </table>";
